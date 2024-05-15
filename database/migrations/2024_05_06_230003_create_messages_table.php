@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('user_id')->nullable();
             $table->string('sender_id')->nullable();
             $table->string('reciever_id')->nullable();
-            $table->string('message')->unique();
+            $table->string('message')->nullable();
             $table->string('message_file')->nullable();
             $table->string('status')->default(0);
             $table->timestamps();

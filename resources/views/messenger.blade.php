@@ -29,23 +29,51 @@
             right: 0.4em;
             border: 1.5px solid white;
         }
+
+        .uTabs {
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background: black;
+            color: white;
+        }
+
+        .uTabs #sTab {
+            width: 40%;
+            background: brown;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .uTabs #gTab {
+            width: 40%;
+            background: brown;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .grpIcn {
+            width: 40px;
+            height: 40px;
+            background: blueviolet;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
     <!------ Include the above in your HEAD tag ---------->
     <link rel="stylesheet" href="{{ asset('css/messenger.css') }}">
     <script src="{{ asset('assets/js/push.min.js') }}"></script>
 
+
 </head>
-<!--Coded With Love By Mutiullah Samim-->
 
 <body>
-
-    {{-- <script>
-            Push.create("Hello James !", {
-                body: "Welcome to the Dashboard.",
-                timeout: 15000,
-                icon: 'https://cdn-icons-png.flaticon.com/512/9709/9709605.png'
-            });
-    </script> --}}
 
     @php
         $users = DB::table('users')
@@ -64,33 +92,71 @@
                                 <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
                             </div>
                         </div>
+                        <div class="col-md-12 uTabs">
+                            <div id="sTab">Single</div>
+                            <div id="gTab">Groups</div>
+                        </div>
                     </div>
                     <div class="card-body contacts_body">
-                        <ui class="contacts">
-                            @foreach ($users as $user)
-                                <li class="user-chat" data-username="{{ $user->name }}" data-id="{{ $user->id }}"
-                                    id="userClck" style="cursor: pointer;">
-                                    <div class="d-flex bd-highlight">
-                                        <div class="img_cont">
-                                            @if ($user->profile)
-                                                <img src="{{ asset('uploads/users/' . $user->profile) }}"
-                                                    class="rounded-circle user_img">
-                                            @else
-                                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                                                    class="rounded-circle user_img">
-                                            @endif
-                                            @if ($user->status == '1')
-                                                <span class="online_icon"></span>
-                                            @endif
+                        <div class="sTab">
+                            <ui class="contacts">
+                                @foreach ($users as $user)
+                                    <li class="user-chat" data-username="{{ $user->name }}"
+                                        data-id="{{ $user->id }}" id="userClck" style="cursor: pointer;">
+                                        <div class="d-flex bd-highlight">
+                                            <div class="img_cont">
+                                                @if ($user->profile)
+                                                    <img src="{{ asset('uploads/users/' . $user->profile) }}"
+                                                        class="rounded-circle user_img">
+                                                @else
+                                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                                        class="rounded-circle user_img">
+                                                @endif
+                                                @if ($user->status == '1')
+                                                    <span class="online_icon"></span>
+                                                @endif
+                                            </div>
+                                            <div class="user_info">
+                                                <span>{{ $user->name }}</span>
+                                                <p>{{ $user->email }}</p>
+                                            </div>
                                         </div>
-                                        <div class="user_info">
-                                            <span>{{ $user->name }}</span>
-                                            <p>{{ $user->email }}</p>
+                                    </li>
+                                @endforeach
+                            </ui>
+                        </div>
+                        <div class="gTab">
+                            <ui class="contacts">
+                                @foreach ($users as $user)
+                                    <li class="user-chat" data-username="{{ $user->name }}"
+                                        data-id="{{ $user->id }}" id="userClck" style="cursor: pointer;">
+                                        <div class="d-flex align-items-center justify-content-between bd-highlight">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="img_cont">
+                                                    @if ($user->profile)
+                                                        <img src="{{ asset('uploads/users/' . $user->profile) }}"
+                                                            class="rounded-circle user_img">
+                                                    @else
+                                                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                                            class="rounded-circle user_img">
+                                                    @endif
+                                                    @if ($user->status == '1')
+                                                        <span class="online_icon"></span>
+                                                    @endif
+                                                </div>
+                                                <div class="user_info">
+                                                    <span>{{ $user->name }}</span>
+                                                    <p>{{ $user->email }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="grpIcn">
+                                                <i class="fa fa-plus fw-bold"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ui>
+                                    </li>
+                                @endforeach
+                            </ui>
+                        </div>
                     </div>
                     <div class="card-footer"></div>
                 </div>
@@ -167,6 +233,25 @@
     <script type="module" src="{{ asset('js/app.js') }}"></script>
 
     <script>
+        $(document).ready(function() {
+            // alert('ok');
+            $('.gTab').hide();
+            $('.sTab').show();
+            $('#sTab').css('background-color', 'green');
+            $(document).on('click', '#gTab', function(e) {
+                // alert('ok');
+                $('.sTab').hide();
+                $('.gTab').show();
+                $('#gTab').css('background-color', 'green');
+                $('#sTab').css('background-color', 'brown');
+            });
+            $(document).on('click', '#sTab', function(e) {
+                $('.sTab').show();
+                $('.gTab').hide();
+                $('#sTab').css('background-color', 'green');
+                $('#gTab').css('background-color', 'brown');
+            });
+        });
         var authId = @json((string) auth()->user()->id);
         var authProfile = $('#user-info').data('profile');
         var authName = @json(auth()->user()->name);

@@ -24,8 +24,24 @@ html {
     white-space: nowrap;
 }
 
+/* Hide scrollbar for WebKit browsers */
+.contacts_body::-webkit-scrollbar {
+    width: 0;
+    /* Set width to 0 to hide the scrollbar */
+    height: 0;
+    /* Set height to 0 to hide the scrollbar */
+}
+
 .msg_card_body {
     overflow-y: auto;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.msg_card_body::-webkit-scrollbar {
+    width: 0;
+    /* Set width to 0 to hide the scrollbar */
+    height: 0;
+    /* Set height to 0 to hide the scrollbar */
 }
 
 .card-header {

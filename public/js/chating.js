@@ -8,6 +8,16 @@ $(document).ready(function () {
         }
     });
 
+    $('#gtab').hide();
+    $('.gtab').click(function () {
+        $('#stab').hide();
+        $('#gtab').show();
+    });
+    $('.stab').click(function () {
+        $('#stab').show();
+        $('#gtab').hide();
+    });
+
     $('.chatBody').hide();
 
     var userInfo = document.getElementById('user-info');

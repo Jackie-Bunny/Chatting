@@ -29,7 +29,12 @@ class AuthController extends Controller
             $file->move('uploads/users/', $fileName);
             $user->profile = $fileName;
         }
+        $user->status = '1';
         $user->save();
+        Auth::login($user);
+        if (Auth::user()) {
+            return redirect()->route('chat.get');
+        }
         return redirect()->back();
     }
 

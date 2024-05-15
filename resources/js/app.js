@@ -10,6 +10,17 @@ $(document).ready(function () {
         }
     });
 
+    $('.gtab').hide();
+    $(document).on('click', '#gtab', function (e) {
+        alert('ok');
+        $('.stab').hide();
+        $('.gtab').show();
+    });
+    $(document).on('click', '#stab', function (e) {
+        $('.stab').show();
+        $('.gtab').hide();
+    });
+
     $('.chatBody').hide();
 
     var userInfo = document.getElementById('user-info');
@@ -27,7 +38,7 @@ $(document).ready(function () {
         var userId = $(this).data('id');
         console.log('Clicked user id', userId);
         $('.chatBody').show();
-        $('.userClck').removeClass('active');
+        $('.user-chat').removeClass('active');
         $(this).addClass('active');
         receiverId = userId;
         $('#recieverid').val(userId);
